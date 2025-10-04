@@ -16,7 +16,9 @@ export default async function handler(req, res) {
 
     // Supabase config
     const SUPABASE_URL = 'https://kclffcufbqfyfyrinvcn.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtjbGZmY3VmYnFmeWZ5cmludmNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjc5ODA0NzAsImV4cCI6MjA0MzU1NjQ3MH0.2WPP0VJcJhpKP0CIzKNx8qUlkxTLCUAaZJFWpZZVLNc';
+    // IMPORTANTE: Use a Service Role Key (encontrada em Settings → API)
+    // Ela tem permissão para chamar Edge Functions
+    const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtjbGZmY3VmYnFmeWZ5cmludmNuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODE1ODcyMiwiZXhwIjoyMDczNzM0NzIyfQ.Br69Gf7qqeuK3xa0-3_Th413No1WxePfuudRvJqnCnU';
 
     // Preparar dados EXATAMENTE como o MP envia
     const webhookData = {
@@ -40,8 +42,8 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'apikey': SUPABASE_ANON_KEY
+          'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+          'apikey': SUPABASE_SERVICE_KEY
         },
         body: JSON.stringify(webhookData)
       }
